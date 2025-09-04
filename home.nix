@@ -15,6 +15,7 @@ let
   dotfiles = config.lib.file.mkOutOfStoreSymlink /persist/dotfiles;
   secrets = config.lib.file.mkOutOfStoreSymlink /persist/secrets;
   steam = config.lib.file.mkOutOfStoreSymlink /persist/steam;
+  fonts = config.lib.file.mkOutOfStoreSymlink /persist/fonts;
 in
 {
   home.packages = with pkgs; [
@@ -110,7 +111,8 @@ in
     enable = true;
     settings = {
       main = {
-        font = "Rec Mono Casual:size=32,Symbols Nerd Font:size=32";
+        font = "Comic Code Ligatures:size=32,Symbols Nerd Font:size=32";
+        # font = "Rec Mono Casual:size=32,Symbols Nerd Font:size=32";
         dpi-aware = "no";
       };
 
@@ -157,8 +159,10 @@ in
     };
   };
 
+  home.file.".local/share/fonts".source = "${fonts}";
+
   home.file.".config/niri".source = "${dotfiles}/niri";
-  home.file.".config/nvim".source = "${dotfiles}/nvim";
+  home.file.".config/nvim".source = "${dotfiles}/nvim_minimal";
   home.file.".config/git".source = "${dotfiles}/git";
   home.file.".config/jj".source = "${dotfiles}/jj";
   home.file.".config/starship.toml".source = "${dotfiles}/starship.toml";
@@ -195,6 +199,7 @@ in
     XDG_CONFIG_HOME = "$HOME/.config";
     XDG_DATA_HOME = "$HOME/.local/share";
     XDG_STATE_HOME = "$HOME/.local/state";
+    EDITOR = "nvim";
     SHELL = "bash";
 
     ANI_CLI_HIST_DIR = "/persist/anime-history";
