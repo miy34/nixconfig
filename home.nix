@@ -1,4 +1,10 @@
-{ self, config, lib, pkgs, ... }:
+{
+  self,
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 let
   # wrapper for steam to force xwayland
   steamXwayland = pkgs.writeShellScriptBin "steam" ''
@@ -9,7 +15,7 @@ let
   dotfiles = config.lib.file.mkOutOfStoreSymlink /persist/dotfiles;
   secrets = config.lib.file.mkOutOfStoreSymlink /persist/secrets;
   steam = config.lib.file.mkOutOfStoreSymlink /persist/steam;
-in 
+in
 {
   home.packages = with pkgs; [
     # media
@@ -18,7 +24,7 @@ in
     ani-cli
     cmus
 
-    # fancy 
+    # fancy
     starship
 
     # dev
@@ -27,12 +33,12 @@ in
     universal-ctags
     nixfmt-rfc-style
 
-    # terminal 
+    # terminal
     foot
     yazi
-    bat 
+    bat
     ripgrep
-    eza  
+    eza
     fd
 
     # wm stuff
@@ -65,93 +71,91 @@ in
   };
 
   # theme
-  stylix = { 
-      base16Scheme = "${pkgs.base16-schemes}/share/themes/kanagawa-dragon.yaml";
-      image = "${wallpaper}";
+  stylix = {
+    base16Scheme = "${pkgs.base16-schemes}/share/themes/kanagawa-dragon.yaml";
+    image = "${wallpaper}";
 
-      fonts = {
-	    serif = {
-	      package = pkgs.recursive;
-	      name = "Recursive Mono Casual";
-	    };
+    fonts = {
+      serif = {
+        package = pkgs.recursive;
+        name = "Recursive Mono Casual";
+      };
 
-	    sansSerif = {
-	      package = pkgs.recursive;
-	      name = "Recursive Mono Casual";
-	    };
+      sansSerif = {
+        package = pkgs.recursive;
+        name = "Recursive Mono Casual";
+      };
 
-	    monospace = {
-	      package = pkgs.recursive;
-	      name = "Recursive Mono Casual";
-	    };
+      monospace = {
+        package = pkgs.recursive;
+        name = "Recursive Mono Casual";
+      };
 
-	    emoji = {
-	      package = pkgs.noto-fonts-emoji;
-	      name = "Noto Color Emoji";
-	    };
+      emoji = {
+        package = pkgs.noto-fonts-emoji;
+        name = "Noto Color Emoji";
+      };
 
-	    sizes = {
-	      terminal = 21;
-	      applications = 18;
-	      desktop = 21;
-	    };
-       };
+      sizes = {
+        terminal = 21;
+        applications = 18;
+        desktop = 21;
+      };
+    };
   };
 
   stylix.targets.foot.enable = false;
 
   programs.foot = {
-      enable = true;
-      settings = {
-          main = {
-             font = "Rec Mono Casual:size=32,Symbols Nerd Font:size=32";
-             dpi-aware = "no";
-          };
+    enable = true;
+    settings = {
+      main = {
+        font = "Rec Mono Casual:size=32,Symbols Nerd Font:size=32";
+        dpi-aware = "no";
+      };
 
-          mouse = {
-              hide-when-typing = "yes";
-          };
+      mouse = {
+        hide-when-typing = "yes";
+      };
 
-          cursor = {
-              color="dcd7ba dcd7ba";
-          };
+      cursor = {
+        color = "dcd7ba dcd7ba";
+      };
 
-          colors = {
-           foreground="f0f0f0";
-        background="181616";
+      colors = {
+        foreground = "f0f0f0";
+        background = "181616";
 
-        regular0  = "0d0c0c"; # black
-        regular1  = "c4746e"; # red
-        regular2  = "8a9a7b"; # green
-        regular3  = "c4b28a"; # yellow
-        regular4  = "8ba4b0"; # blue
-        regular5  = "a292a3"; # magenta
-        regular6  = "8ea4a2"; # cyan
-        regular7  = "c8c093"; # white
+        regular0 = "0d0c0c"; # black
+        regular1 = "c4746e"; # red
+        regular2 = "8a9a7b"; # green
+        regular3 = "c4b28a"; # yellow
+        regular4 = "8ba4b0"; # blue
+        regular5 = "a292a3"; # magenta
+        regular6 = "8ea4a2"; # cyan
+        regular7 = "c8c093"; # white
 
-        bright0   = "a6a69c"; # bright black
-        bright1   = "e46876"; # bright red
-        bright2   = "87a987"; # bright green
-        bright3   = "e6c384"; # bright yellow
-        bright4   = "7fb4ca"; # bright blue
-        bright5   = "a895c7"; # bright magenta
-        bright6   = "7aa89f"; # bright cyan
-        bright7   = "dcd7ba"; # bright white
+        bright0 = "a6a69c"; # bright black
+        bright1 = "e46876"; # bright red
+        bright2 = "87a987"; # bright green
+        bright3 = "e6c384"; # bright yellow
+        bright4 = "7fb4ca"; # bright blue
+        bright5 = "a895c7"; # bright magenta
+        bright6 = "7aa89f"; # bright cyan
+        bright7 = "dcd7ba"; # bright white
 
         selection-foreground = "181616";
         selection-background = "c8c093";
 
-        search-box-no-match="11111b f38ba8";
-        search-box-match="cdd6f4 313244";
+        search-box-no-match = "11111b f38ba8";
+        search-box-match = "cdd6f4 313244";
 
-        jump-labels="11111b fab387";
-        urls="89b4fa";
-};
-
+        jump-labels = "11111b fab387";
+        urls = "89b4fa";
       };
+
+    };
   };
-
-
 
   home.file.".config/niri".source = "${dotfiles}/niri";
   home.file.".config/nvim".source = "${dotfiles}/nvim";
@@ -163,7 +167,6 @@ in
 
   home.file.".mozilla".source = "${secrets}/firefox";
   home.file.".ssh".source = "${secrets}/ssh";
-
 
   home.file.".steam".source = "${steam}/steam";
   home.file.".local/state/wireplumber".source = "${dotfiles}/wireplumber";
@@ -177,13 +180,13 @@ in
   programs.bash = {
     enable = true;
     profileExtra = ''
-	if [ -z "''${WAYLAND_DISPLAY}" ] && [ "''${XDG_VTNR}" -eq 1 ] && [[ -z "$NIRI_STARTED" ]]; then
-	   export NIRI_STARTED=1;
-	   exec niri-session
-	fi
-	'';
+      	if [ -z "''${WAYLAND_DISPLAY}" ] && [ "''${XDG_VTNR}" -eq 1 ] && [[ -z "$NIRI_STARTED" ]]; then
+      	   export NIRI_STARTED=1;
+      	   exec niri-session
+      	fi
+      	'';
     bashrcExtra = ''
-        eval "$(starship init bash)"
+      eval "$(starship init bash)"
     '';
   };
 
@@ -213,27 +216,25 @@ in
 
   # wallpaper
   services.wpaperd = {
-     enable = true;
-     settings = {
-	 any = {
-           path = config.stylix.image;
-	 };
-     };
+    enable = true;
+    settings = {
+      any = {
+        path = config.stylix.image;
+      };
+    };
   };
   # notifications
   services.dunst = {
     enable = true;
   };
 
-
   xdg.portal = {
     enable = true;
-    config.common.default ="*";
+    config.common.default = "*";
     extraPortals = [
       pkgs.xdg-desktop-portal-gtk
     ];
   };
 
-      home.stateVersion = "25.05";
-
+  home.stateVersion = "25.05";
 }

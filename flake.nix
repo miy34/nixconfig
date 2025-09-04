@@ -14,28 +14,36 @@
     xwayland-satellite.url = "github:Supreeeme/xwayland-satellite";
   };
 
-  outputs = { self, nixpkgs, home-manager, stylix, xwayland-satellite, ... }: 
-    let
-       system = "x86_64-linux";
-       user = "miy";
-    in 
+  outputs =
     {
-    defaultSystem = system;
-    nixosConfigurations = {
-      miy-nixos = nixpkgs.lib.nixosSystem {
-        system = "${system}";
-        modules = [
-	  stylix.nixosModules.stylix
-          ./filesystem.nix
-          ./configuration.nix
-          home-manager.nixosModules.home-manager 
-	  {
-  	      home-manager.useGlobalPkgs = true;
+      self,
+      nixpkgs,
+      home-manager,
+      stylix,
+      xwayland-satellite,
+      ...
+    }:
+    let
+      system = "x86_64-linux";
+      user = "miy";
+    in
+    {
+      defaultSystem = system;
+      nixosConfigurations = {
+        miy-nixos = nixpkgs.lib.nixosSystem {
+          system = "${system}";
+          modules = [
+            stylix.nixosModules.stylix
+            ./filesystem.nix
+            ./configuration.nix
+            home-manager.nixosModules.home-manager
+            {
+              home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
               home-manager.users.miy = ./home.nix;
-	  }
-        ];
+            }
+          ];
+        };
       };
     };
-  };
 }
