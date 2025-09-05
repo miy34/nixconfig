@@ -106,6 +106,11 @@ in
 
   stylix.targets.foot.enable = false;
 
+  programs.direnv = {
+      enable = true;
+      enableBashIntegration = true;
+  };
+
   programs.foot = {
     enable = true;
     settings = {
