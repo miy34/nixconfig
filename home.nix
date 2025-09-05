@@ -33,6 +33,7 @@ in
     jujutsu
     universal-ctags
     nixfmt-rfc-style
+    marksman
 
     # terminal
     foot
@@ -60,8 +61,6 @@ in
     font-awesome
     nerd-fonts.symbols-only
   ];
-
-  fonts.fontconfig.enable = true;
 
   home.pointerCursor = {
     gtk.enable = true;
@@ -98,7 +97,7 @@ in
       };
 
       sizes = {
-        terminal = 21;
+        terminal = 22;
         applications = 18;
         desktop = 21;
       };
@@ -111,9 +110,9 @@ in
     enable = true;
     settings = {
       main = {
-        font = "Comic Code Ligatures:size=32,Symbols Nerd Font:size=32";
-        # font = "Rec Mono Casual:size=32,Symbols Nerd Font:size=32";
+        font = "Comic Code:size=32, PowerlineExtraSymbols:size=34, Symbols Nerd Font:size=32";
         dpi-aware = "no";
+        box-drawings-uses-font-glyphs="yes";
       };
 
       mouse = {
@@ -162,7 +161,7 @@ in
   home.file.".local/share/fonts".source = "${fonts}";
 
   home.file.".config/niri".source = "${dotfiles}/niri";
-  home.file.".config/nvim".source = "${dotfiles}/nvim_minimal";
+  home.file.".config/nvim".source = "${dotfiles}/nvim";
   home.file.".config/git".source = "${dotfiles}/git";
   home.file.".config/jj".source = "${dotfiles}/jj";
   home.file.".config/starship.toml".source = "${dotfiles}/starship.toml";
