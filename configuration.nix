@@ -71,7 +71,7 @@
       };
     };
 
-    getty.autologinUser = "miy";
+    getty.autologinUser = "miy34";
 
     # Enable sound.
     pipewire = {
@@ -92,9 +92,8 @@
     root = {
       initialHashedPassword = "$6$4Jxjcmy7vpS6CslQ$APW/LBTfbJN9oNKRQ.bReOEZoDlSMke5Hv/BKoM2Qrzsxq4tRxFK21CAHtp9CGVaKYAdh/eVlzGuM0CE0hzrW/";
     };
-    miy = {
+    miy34 = {
       isNormalUser = true;
-      description = "miy";
       initialHashedPassword = "$6$4Jxjcmy7vpS6CslQ$APW/LBTfbJN9oNKRQ.bReOEZoDlSMke5Hv/BKoM2Qrzsxq4tRxFK21CAHtp9CGVaKYAdh/eVlzGuM0CE0hzrW/";
       extraGroups = [
         "wheel"

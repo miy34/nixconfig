@@ -25,7 +25,6 @@
     }:
     let
       system = "x86_64-linux";
-      user = "miy";
     in
     {
       defaultSystem = system;
@@ -40,7 +39,7 @@
             {
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
-              home-manager.users.miy = ./home.nix;
+              home-manager.users.miy34 = ./home.nix;
             }
           ];
         };
