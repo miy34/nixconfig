@@ -24,6 +24,7 @@ in
     firefox
     ani-cli
     cmus
+    playerctl
 
     # fancy
     starship
