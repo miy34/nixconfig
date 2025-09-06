@@ -35,6 +35,7 @@ in
     universal-ctags
     nixfmt-rfc-style
     marksman
+    bacon
 
     # terminal
     foot
