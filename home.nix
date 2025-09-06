@@ -106,10 +106,17 @@ in
   };
 
   stylix.targets.foot.enable = false;
+  stylix.targets.zellij.enable = false;
 
   programs.direnv = {
       enable = true;
       enableBashIntegration = true;
+  };
+
+  programs.zellij = {
+      enable = true;
+      enableBashIntegration = true;
+      exitShellOnExit = true;
   };
 
   programs.foot = {
@@ -167,12 +174,12 @@ in
   home.file.".local/share/fonts".source = "${fonts}";
 
   home.file.".config/niri".source = "${dotfiles}/niri";
-  home.file.".config/nvim".source = "${dotfiles}/nvim";
+  home.file.".config/nvim".source = "${dotfiles}/nvim_minimal";
   home.file.".config/git".source = "${dotfiles}/git";
   home.file.".config/jj".source = "${dotfiles}/jj";
   home.file.".config/starship.toml".source = "${dotfiles}/starship.toml";
   home.file.".config/cmus".source = "${dotfiles}/cmus";
-  # home.file.".config/zellij".source = "${dotfiles}/zellij";
+  home.file.".config/zellij".source = "${dotfiles}/zellij";
 
   home.file.".mozilla".source = "${secrets}/firefox";
   home.file.".ssh".source = "${secrets}/ssh";
