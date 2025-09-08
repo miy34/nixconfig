@@ -6,11 +6,6 @@
   ...
 }:
 let
-  # wrapper for steam to force xwayland
-  steamXwayland = pkgs.writeShellScriptBin "steam" ''
-    export DISPLAY=:0
-    exec ${pkgs.steam}/bin/steam "$@"
-  '';
   wallpaper = ./wallpapers/fight_break_sphere.png;
   dotfiles = config.lib.file.mkOutOfStoreSymlink /persist/dotfiles;
   secrets = config.lib.file.mkOutOfStoreSymlink /persist/secrets;
@@ -25,6 +20,9 @@ in
     ani-cli
     cmus
     playerctl
+
+    # content creation 
+    audacity
 
     # fancy
     starship
@@ -53,7 +51,8 @@ in
     slurp
     swayimg
     fuzzel
-    steamXwayland
+    xwayland-satellite
+    steam
 
     # fonts
     recursive
@@ -106,8 +105,27 @@ in
     };
   };
 
-  stylix.targets.foot.enable = false;
+    programs.obs-studio = {
+        enable = true;
 
+        # optional Nvidia hardware acceleration
+        package = (
+          pkgs.obs-studio.override {
+            cudaSupport = true;
+          }
+        );
+
+        plugins = with pkgs.obs-studio-plugins; [
+          wlrobs
+          obs-backgroundremoval
+          obs-pipewire-audio-capture
+          obs-vaapi #optional AMD hardware acceleration
+          obs-gstreamer
+          obs-vkcapture
+        ];
+      };
+
+  stylix.targets.foot.enable = false;
   programs.foot = {
     enable = true;
     settings = {
@@ -167,12 +185,12 @@ in
   home.file.".local/share/fonts".source = "${fonts}";
 
   home.file.".config/niri".source = "${dotfiles}/niri";
-  home.file.".config/nvim".source = "${dotfiles}/nvim_minimal";
+  home.file.".config/nvim".source = "${dotfiles}/nvim";
   home.file.".config/git".source = "${dotfiles}/git";
   home.file.".config/jj".source = "${dotfiles}/jj";
   home.file.".config/starship.toml".source = "${dotfiles}/starship.toml";
   home.file.".config/cmus".source = "${dotfiles}/cmus";
-  home.file.".config/zellij".source = "${dotfiles}/zellij";
+  home.file.".config/easyeffects".source = "${dotfiles}/easyeffects";
 
   home.file.".mozilla".source = "${secrets}/firefox";
   home.file.".ssh".source = "${secrets}/ssh";
@@ -251,13 +269,20 @@ in
   # notifications
   services.dunst = {
     enable = true;
+    settings = {
+        global.follow = "keyboard";
+    };
+  };
+
+  services.easyeffects = {
+    enable = true;
   };
 
   xdg.portal = {
     enable = true;
     config.common.default = "*";
     extraPortals = [
-      pkgs.xdg-desktop-portal-gtk
+      pkgs.xdg-desktop-portal-gnome
     ];
   };
 

@@ -11,7 +11,7 @@
       url = "github:nix-community/stylix/release-25.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    xwayland-satellite.url = "github:Supreeeme/xwayland-satellite";
+    # xwayland-satellite.url = "github:Supreeeme/xwayland-satellite";
   };
 
   outputs =
@@ -20,7 +20,7 @@
       nixpkgs,
       home-manager,
       stylix,
-      xwayland-satellite,
+      # xwayland-satellite,
       ...
     }:
     let
