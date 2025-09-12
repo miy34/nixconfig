@@ -105,6 +105,12 @@ in
     };
   };
 
+  programs.zoxide = {
+      enable = true;
+      enableBashIntegration = true;
+      enableNushellIntegration = true;
+  };
+
     programs.obs-studio = {
         enable = true;
 
@@ -204,6 +210,7 @@ in
     "video/*" = [ "mpv.desktop" ];
   };
 
+
   programs.bash = {
     enable = true;
     profileExtra = ''
@@ -242,6 +249,7 @@ in
 
     ANI_CLI_HIST_DIR = "/persist/anime-history";
     MY_NIX_CONFIG = "/persist/nixconfig";
+    _ZO_DATA_DIR = "/persist/zoxide";
   };
 
   home.shellAliases = {
@@ -253,6 +261,7 @@ in
     find = "fd";
     ls = "eza --icons";
     grep = "rg";
+    cd = "z";
 
     nixconfig = "sudo nixos-rebuild switch --flake $MY_NIX_CONFIG";
   };
