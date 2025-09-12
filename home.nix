@@ -21,7 +21,7 @@ in
     cmus
     playerctl
 
-    # content creation 
+    # content creation
     audacity
 
     # fancy
@@ -106,30 +106,30 @@ in
   };
 
   programs.zoxide = {
-      enable = true;
-      enableBashIntegration = true;
-      enableNushellIntegration = true;
+    enable = true;
+    enableBashIntegration = true;
+    enableNushellIntegration = true;
   };
 
-    programs.obs-studio = {
-        enable = true;
+  programs.obs-studio = {
+    enable = true;
 
-        # optional Nvidia hardware acceleration
-        package = (
-          pkgs.obs-studio.override {
-            cudaSupport = true;
-          }
-        );
+    # optional Nvidia hardware acceleration
+    package = (
+      pkgs.obs-studio.override {
+        cudaSupport = true;
+      }
+    );
 
-        plugins = with pkgs.obs-studio-plugins; [
-          wlrobs
-          obs-backgroundremoval
-          obs-pipewire-audio-capture
-          obs-vaapi #optional AMD hardware acceleration
-          obs-gstreamer
-          obs-vkcapture
-        ];
-      };
+    plugins = with pkgs.obs-studio-plugins; [
+      wlrobs
+      obs-backgroundremoval
+      obs-pipewire-audio-capture
+      obs-vaapi # optional AMD hardware acceleration
+      obs-gstreamer
+      obs-vkcapture
+    ];
+  };
 
   stylix.targets.foot.enable = false;
   programs.foot = {
@@ -138,7 +138,7 @@ in
       main = {
         font = "Comic Code:size=32, PowerlineExtraSymbols:size=34, Symbols Nerd Font:size=32";
         dpi-aware = "no";
-        box-drawings-uses-font-glyphs="yes";
+        box-drawings-uses-font-glyphs = "yes";
       };
 
       mouse = {
@@ -150,7 +150,7 @@ in
       };
 
       key-bindings = {
-          spawn-terminal = "Alt+n";
+        spawn-terminal = "Alt+n";
       };
 
       colors = {
@@ -209,7 +209,6 @@ in
     "image/*" = [ "swayimg.desktop" ];
     "video/*" = [ "mpv.desktop" ];
   };
-
 
   programs.bash = {
     enable = true;
@@ -279,7 +278,7 @@ in
   services.dunst = {
     enable = true;
     settings = {
-        global.follow = "keyboard";
+      global.follow = "keyboard";
     };
   };
 
