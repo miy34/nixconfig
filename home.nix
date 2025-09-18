@@ -203,6 +203,7 @@ in
 
   home.file.".steam".source = "${steam}/steam";
   home.file.".local/state/wireplumber".source = "${dotfiles}/wireplumber";
+  home.file.".local/share/nvim/lazy".source = "${dotfiles}/nvim_lazy";
 
   xdg.mimeApps.defaultApplications = {
     enable = true;
@@ -274,6 +275,7 @@ in
       };
     };
   };
+
   # notifications
   services.dunst = {
     enable = true;
