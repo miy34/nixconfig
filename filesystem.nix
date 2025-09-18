@@ -48,7 +48,7 @@
     };
     #bindings
     "/nix" = {
-      device = "/system/nix";
+      device = "/persist/nix";
       fsType = "none";
       options = [ "bind" ];
       neededForBoot = true;
