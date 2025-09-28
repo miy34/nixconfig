@@ -191,7 +191,7 @@ in
   home.file.".local/share/fonts".source = "${fonts}";
 
   home.file.".config/niri".source = "${dotfiles}/niri";
-  home.file.".config/nvim".source = "${dotfiles}/nvim";
+  home.file.".config/nvim".source = "${dotfiles}/nvim_minimal";
   home.file.".config/git".source = "${dotfiles}/git";
   home.file.".config/jj".source = "${dotfiles}/jj";
   home.file.".config/starship.toml".source = "${dotfiles}/starship.toml";
