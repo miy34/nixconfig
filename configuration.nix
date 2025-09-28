@@ -86,6 +86,14 @@
 
     # Enable touchpad support (enabled default in most desktopManager).
     libinput.enable = true;
+
+    # Scanner 
+    avahi = {
+        enable = true;
+        nssmdns4 = true;
+    };
+
+    udev.packages = [ pkgs.sane-airscan ];
   };
 
   users.users = {
@@ -97,6 +105,8 @@
       initialHashedPassword = "$6$4Jxjcmy7vpS6CslQ$APW/LBTfbJN9oNKRQ.bReOEZoDlSMke5Hv/BKoM2Qrzsxq4tRxFK21CAHtp9CGVaKYAdh/eVlzGuM0CE0hzrW/";
       extraGroups = [
         "wheel"
+        "scanner"
+        "lp"
       ];
     };
   };
@@ -116,6 +126,11 @@
       enable32Bit = true;
     };
     cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
+    sane = {
+        enable = true;
+        extraBackends = [ pkgs.sane-airscan ];
+        disabledDefaultBackends = [ "escl" "v4l" ];
+    };
   };
 
   # auto maintainance: collect garbage, optimize, upgrade
