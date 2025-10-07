@@ -246,6 +246,7 @@ in
     XDG_STATE_HOME = "$HOME/.local/state";
     EDITOR = "nvim";
     SHELL = "bash";
+    MANPAGER = "nvim +Man!";
 
     ANI_CLI_HIST_DIR = "/persist/anime-history";
     MY_NIX_CONFIG = "/persist/nixconfig";
