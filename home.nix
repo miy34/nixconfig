@@ -20,9 +20,12 @@ in
     ani-cli
     cmus
     playerctl
+    newsboat
 
     # content creation
     audacity
+    gimp3
+    blender
 
     # fancy
     starship
@@ -42,6 +45,7 @@ in
     ripgrep
     eza
     fd
+    fzf
 
     # wm stuff
     # niri
@@ -111,6 +115,13 @@ in
     enableNushellIntegration = true;
   };
 
+  stylix.targets.foot.enable = false;
+  stylix.targets.zellij.enable = false;
+  programs.zellij = {
+    enable = true;
+    enableBashIntegration = true;
+  };
+
   programs.obs-studio = {
     enable = true;
 
@@ -131,72 +142,20 @@ in
     ];
   };
 
-  stylix.targets.foot.enable = false;
-  programs.foot = {
-    enable = true;
-    settings = {
-      main = {
-        font = "Comic Code:size=32, PowerlineExtraSymbols:size=34, Symbols Nerd Font:size=32";
-        dpi-aware = "no";
-        box-drawings-uses-font-glyphs = "yes";
-      };
-
-      mouse = {
-        hide-when-typing = "yes";
-      };
-
-      cursor = {
-        color = "dcd7ba dcd7ba";
-      };
-
-      key-bindings = {
-        spawn-terminal = "Alt+n";
-      };
-
-      colors = {
-        foreground = "f0f0f0";
-        background = "181616";
-
-        regular0 = "0d0c0c"; # black
-        regular1 = "c4746e"; # red
-        regular2 = "8a9a7b"; # green
-        regular3 = "c4b28a"; # yellow
-        regular4 = "8ba4b0"; # blue
-        regular5 = "a292a3"; # magenta
-        regular6 = "8ea4a2"; # cyan
-        regular7 = "c8c093"; # white
-
-        bright0 = "a6a69c"; # bright black
-        bright1 = "e46876"; # bright red
-        bright2 = "87a987"; # bright green
-        bright3 = "e6c384"; # bright yellow
-        bright4 = "7fb4ca"; # bright blue
-        bright5 = "a895c7"; # bright magenta
-        bright6 = "7aa89f"; # bright cyan
-        bright7 = "dcd7ba"; # bright white
-
-        selection-foreground = "181616";
-        selection-background = "c8c093";
-
-        search-box-no-match = "11111b f38ba8";
-        search-box-match = "cdd6f4 313244";
-
-        jump-labels = "11111b fab387";
-        urls = "89b4fa";
-      };
-
-    };
-  };
 
   home.file.".local/share/fonts".source = "${fonts}";
 
+  home.file.".config/foot".source = "${dotfiles}/foot";
   home.file.".config/niri".source = "${dotfiles}/niri";
   home.file.".config/nvim".source = "${dotfiles}/nvim_minimal";
   home.file.".config/git".source = "${dotfiles}/git";
   home.file.".config/jj".source = "${dotfiles}/jj";
+  home.file.".config/zellij".source = "${dotfiles}/zellij";
   home.file.".config/starship.toml".source = "${dotfiles}/starship.toml";
   home.file.".config/cmus".source = "${dotfiles}/cmus";
   home.file.".config/easyeffects".source = "${dotfiles}/easyeffects";
+  home.file.".config/obs-studio".source = "${dotfiles}/obs-studio";
+  home.file.".newsboat".source = "${dotfiles}/newsboat";
 
   home.file.".mozilla".source = "${secrets}/firefox";
   home.file.".ssh".source = "${secrets}/ssh";
@@ -204,6 +163,7 @@ in
   home.file.".steam".source = "${steam}/steam";
   home.file.".local/state/wireplumber".source = "${dotfiles}/wireplumber";
   home.file.".local/share/nvim/lazy".source = "${dotfiles}/nvim_lazy";
+  home.file.".local/share/direnv".source = "${dotfiles}/direnv";
 
   xdg.mimeApps.defaultApplications = {
     enable = true;
@@ -239,12 +199,18 @@ in
     '';
   };
 
+  programs.direnv = {
+    enable = true;
+    enableBashIntegration = true;
+  };
+
   home.sessionVariables = {
     XDG_CACHE_HOME = "$HOME/.cache";
     XDG_CONFIG_HOME = "$HOME/.config";
     XDG_DATA_HOME = "$HOME/.local/share";
     XDG_STATE_HOME = "$HOME/.local/state";
     EDITOR = "nvim";
+    BROWSER = "firefox";
     SHELL = "bash";
     MANPAGER = "nvim +Man!";
 
@@ -254,6 +220,9 @@ in
   };
 
   home.shellAliases = {
+    # I cant type, lmao 
+    nivm = "nvim";
+
     # prevent accidents
     rm = "rm -I";
 
@@ -264,6 +233,7 @@ in
     grep = "rg";
     cd = "z";
 
+    # convenience
     nixconfig = "sudo nixos-rebuild switch --flake $MY_NIX_CONFIG";
   };
 
