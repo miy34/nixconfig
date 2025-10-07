@@ -26,7 +26,7 @@
         "usbhid"
         "sd_mod"
       ];
-      kernelModules = [ ];
+      kernelModules = [ "hid_nintendo" ];
       preLVMCommands = ''
         ${pkgs.kbd}/bin/setleds +num
       '';
@@ -117,7 +117,6 @@
     wget
     git
     xwayland-satellite
-    steam
   ];
 
   hardware = {
@@ -130,6 +129,20 @@
         enable = true;
         extraBackends = [ pkgs.sane-airscan ];
         disabledDefaultBackends = [ "escl" "v4l" ];
+    };
+    bluetooth = {
+        enable = true;
+        powerOnBoot = true;
+        settings = {
+            General = {
+                Experimental = true;
+            };
+        };
+        input = {
+            General = {
+                IdleTimeout = 300;
+            };
+        };
     };
   };
 
@@ -156,5 +169,10 @@
   programs.niri.enable = true;
   programs.ssh.startAgent = true;
 
+  programs.steam = {
+      enable = true;
+  };
+
   system.stateVersion = "25.11"; # Did you read the comment?
+
 }

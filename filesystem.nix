@@ -53,7 +53,6 @@
       options = [ "bind" ];
       neededForBoot = true;
     };
-
     "/var/log" = {
       device = "/system/var/log";
       fsType = "none";
@@ -92,6 +91,11 @@
     };
     "/var/lib/systemd" = {
       device = "/var/lib/systemd";
+      fsType = "none";
+      options = [ "bind" ];
+    };
+    "/var/lib/bluetooth" = {
+      device = "/system/var/lib/bluetooth";
       fsType = "none";
       options = [ "bind" ];
     };
